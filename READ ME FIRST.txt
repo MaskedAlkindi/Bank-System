@@ -1,0 +1,6 @@
+'banksystem.h' is my header file
+'banksystemfunctions.cpp' is the file used to define functions in the class named banksystem 
+'Main.cpp' is my main file. 
+
+
+Hajid Alkindi 

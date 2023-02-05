@@ -1,0 +1,78 @@
+#include <iostream>
+#include <string>
+#include "banksystem.h"
+using namespace std; 
+/*The code is split to three files, using OOP and functions.*/
+void mainMenu() {
+	string input;
+	int num;
+	banksystem user;
+	while (true) {
+		cout << "\nd -> Deposit Money\nw -> Withdraw Money\nr -> Request Balance\nq -> Quit\n";
+		cout << ">"; // bank menu 
+		cin >> input; 
+		if (input == "q" || input == "Q") {
+			cout << "\n Thanks for stopping by! \n";
+			break;
+		}
+		else if (input == "d" || input == "D") { 
+			cout << "\nAmount of deposit: ";
+			cin >> num;
+			user.Deposit(num);
+		}
+		else if (input == "w" || input == "W") {
+			cout << "\nAmount of withdrawal: ";
+			cin >> num;
+			user.Withdraw(num);
+		}
+		else if (input == "b" || input == "B") { //Note that the picture asked the input for displaying balance as r, but the instruction paper said b, so i followed the instruction paper
+			user.displayBalance();
+		}
+		else {
+			cout << "Wrong input\n";
+		}
+	};
+};
+void introMenu() { // this is the main function 
+	string option;
+	string id, pass;
+	banksystem user;
+	while (true) {
+		cout << "Hi! Welcome to the ATM Machine! \nPlease select an option from the menu below : \nl->Login \nc->Create New Account";
+		cout << "\n<"; // outputting the main menu 
+		cin >> option;
+		if (option == "l"|| option == "L") {
+			cout << "Please enter your user id :";
+			cin >> id;
+			cout << "Please enter your password :";
+			cin >> pass;
+			if (user.Login(id, pass) == "1") {
+				cout << "\nAccess Granted!\n";
+			} else if (user.Login(id, pass) == "0") {
+				cout << "\n******** LOGIN FAILED! ********\n";
+				continue;
+			};
+		}
+		else if (option == "c" || option == "C") {
+			cout << "Please enter your user id :";
+			cin >> id;
+			cout << "Please enter your password :";
+			cin >> pass;
+			user.createAccount(id, pass);
+			cout << "\nThank You! Your account has been created!\n";
+			continue;
+		}
+		else {
+			cout << "Wrong input\n";
+			continue;
+
+		};
+		if (user.Login(id, pass) == "1") {
+			mainMenu(); // if login is successful the main menu of the bank will apear calling the other function.
+			break;
+		};
+	};
+};
+int main() {
+	introMenu();
+}
